@@ -19,36 +19,36 @@
                     <div class="header-row">
                         <div class="header-firstGroup">
                             <div class="header-logo-group">
-                                <img src="../Img/logo.png" alt="logo" class="logo-img">
+                                <img src="{{url_for('static', filename='img/logo.png')}}" alt="logo" class="logo-img">
                                 <p class="header-logo-title">SmartSense</p>
                             </div>
                             <div class="header-itemListDiv">
                                 <ul class="header-itemList">
                                     <li class="header-item">
                                         <div class="item-group">
-                                            <img src="../Img/home.png" alt="dashboard-icon" class="item-img">
-                                            <a class="item-text" href="../dashboard/dash.html">Dashboard</a>
+                                            <img src="{{url_for('static', filename='img/home.png')}}" alt="dashboard-icon" class="item-img">
+                                            <a class="item-text" href="{{ url_for('dashboard') }}">Dashboard</a>
                                         </div>
                                     </li>
 
                                     <li class="header-item">
                                         <div class="item-group">
-                                            <img src="../Img/graph.png" alt="analytics-icon" class="item-img">
-                                            <a class="item-text" href="#">Analytics</a>
+                                            <img src="{{url_for('static', filename='img/graph.png')}}" alt="analytics-icon" class="item-img">
+                                            <a class="item-text" href="{{ url_for('dashboard') }}">Analytics</a>
                                         </div>
                                     </li>
 
                                     <li class="header-item">
                                         <div class="item-group">
-                                            <img src="../Img/settings.png" alt="settings-icon" class="item-img">
-                                            <a class="item-text" href="#">Settings</a>
+                                            <img src="{{url_for('static', filename='img/settings.png')}}" alt="settings-icon" class="item-img">
+                                            <a class="item-text" href="{{ url_for('dashboard') }}">Admin Panel</a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="header-secGroup">
-                            <a href="#"><img src="../Img/leave.png" alt="leave-icon" class="header-leave"></a>
+                            <a href="{{ url_for('dashboard') }}"><img src="{{url_for('static', filename='img/leave.png')}}" alt="leave-icon" class="header-leave"></a>
                         </div>
                     </div>
                 </div>

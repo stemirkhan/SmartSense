@@ -1,0 +1,248 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+a{
+    color:inherit;
+    text-decoration: none;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -----------------------ОБНУЛЕНИЕ------------------------------- */
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.wrapper{
+    min-height: 100%;
+    overflow: hidden;
+    min-width: 100%;
+}
+.header_container{
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: content-box;
+    max-width: 1800px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+.header {
+    background-color: #151924;
+}
+.header_container {
+}
+.header-content {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-firstGroup {
+    display: flex;
+    align-items: center;
+}
+.header-logo-group {
+    display: flex;
+    align-items: center;
+}
+.logo-img {
+}
+.header-logo-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    padding-left: 12px;
+}
+.header-itemListDiv{
+    padding-left: 90px;
+}
+.header-itemList {
+    display: flex;
+    align-items: center;
+}
+.header-item {
+    padding-left: 34px;
+    cursor: pointer;
+}
+.item-group {
+    display: flex;
+    align-items: center;
+}
+.item-img {
+    padding-right: 14px;
+}
+.item-text {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #CFD1D4;
+}
+.header-secGroup {
+}
+.header-leave{
+cursor: pointer;
+}
+@media(max-width:850px){
+  .header-itemListDiv{
+    padding-left: 20px;
+  }
+  
+}
+@media(max-width:711px){
+  .item-text{
+    display: none;
+  }
+}
+@media(max-width:494px){
+  .header-logo-title{
+    display: none;
+  }
+  .header-item{
+    padding-left: 18px;
+  }
+}
+
+
+
+
+.main {
+  background-color: #575DFB;
+}
+.main-content {
+  padding-bottom: 126px;
+}
+.main-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-right: -80px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.card {
+  background-color: #151924;
+  margin-right: 80px;
+  max-width: 500px;
+  width: 100%;
+  height: 100%;
+  margin-top: 55px;
+  border-radius: 12px;
+}
+.card-content {
+  
+  padding: 38px 148px 156px 148px;
+}
+.card-title {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  color: #D8D8D8;
+  text-align: center;
+}
+.card-text {
+  text-align: center;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 96px;
+  line-height: 100px;
+  color: #17B1EA;
+  padding-top: 90px;
+}
+
+@media(max-width:568px){
+  .card-content{
+    padding: 38px 0px 156px 0px
+  }
+}
