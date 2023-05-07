@@ -55,6 +55,20 @@ class ServerAccessToken(db.Model):
         return f"ServerAccessToken(token_id={self.token_id}, token_name={self.token_name})"
 
 
+class SensorReading(db.Model):
+    __tablename__ = 'sensor_readings'
+
+    recording_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    recording_time = db.Column(db.DateTime, default=datetime.utcnow)
+    temperature = db.Column(db.Float)
+    pressure = db.Column(db.Float)
+    carbon_monoxide = db.Column(db.Integer)
+    humidity = db.Column(db.Float)
+
+    def __repr__(self):
+        return f'SensorReading(recording_id={self.recording_id})'
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.query(User).get(user_id)
