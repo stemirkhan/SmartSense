@@ -1,5 +1,5 @@
 from flask import render_template, url_for, redirect
-from flask_login import login_user, current_user, login_required
+from flask_login import login_user, current_user, login_required, logout_user
 
 from app import app
 from app.models import User, SensorReading, db
@@ -32,4 +32,10 @@ def dashboard():
                        ('Угарный газ', readings_value.carbon_monoxide),
                        ('Атмосферное давление', readings_value.pressure))
 
-    return render_template('dashboard.html', sensor_readings=sensor_readings, title='dashboard')
+    return render_template('dashboard.html', sensor_readings=sensor_readings, title='Dashboard')
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('login')
