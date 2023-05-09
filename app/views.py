@@ -17,7 +17,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
 
         if user and user.check_password(form.password.data):
-            login_user(user)
+            login_user(user, remember=form.remember.data)
             return redirect(url_for(endpoint='dashboard'))
 
     return render_template('login.html', title='Sign In', form=form)
@@ -26,7 +26,7 @@ def login():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    readings_value = db.session.query(SensorReading).order_by(SensorReading.recording_id.desc()).first()
+    readings_value = db.session.query(SensorReading).order_by(SensorReading.id.desc()).first()
     sensor_readings = (('Температура', readings_value.temperature),
                        ('Влажность', readings_value.humidity),
                        ('Угарный газ', readings_value.carbon_monoxide),
