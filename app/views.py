@@ -36,6 +36,12 @@ def dashboard():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect('login')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
