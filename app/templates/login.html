@@ -32,7 +32,13 @@
             <img src="{{url_for('static', filename='img/open_eye.svg')}}" alt="lock" class="input-icon eye first opened">
             </div>
 
-            <a class="auth-forgetPass" href="../forgotPassword/forgot.html">Забыли пароль?</a>
+            <div class="form-row">
+                <div class="form-checkbox-group">
+                    {{ form.remember(type="checkbox", id="remember", class="form-checkbox")}}
+                    <label for="remember" class="form-checkbox-label">{{form.remember.label.text}}</label>
+                </div>
+                <a class="auth-forgetPass" href="forgot.html">Забыли пароль?</a>
+            </div>
             {{ form.submit(type="submit", class="form-button", value="Sign In") }}
         </form>
         </div>
