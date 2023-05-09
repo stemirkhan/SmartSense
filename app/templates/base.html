@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>{{title}}</title>
+  {% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+      {% block menu %}
+        <div class="header">
+            <div class="header_container">
+                <div class="header-content">
+                    <div class="header-row">
+                        <div class="header-firstGroup">
+                            <div class="header-logo-group">
+                                <img src="{{url_for('static', filename='img/logo.png')}}" alt="logo" class="logo-img">
+                                <p class="header-logo-title">SmartSense</p>
+                            </div>
+                            <div class="header-itemListDiv">
+                                <ul class="header-itemList">
+                                    <li class="header-item">
+                                        <div class="item-group">
+                                            <img src="{{url_for('static', filename='img/home.png')}}" alt="dashboard-icon" class="item-img">
+                                            <a class="item-text" href="{{ url_for('dashboard') }}">Dashboard</a>
+                                        </div>
+                                    </li>
+
+                                    <li class="header-item">
+                                        <div class="item-group">
+                                            <img src="{{url_for('static', filename='img/graph.png')}}" alt="analytics-icon" class="item-img">
+                                            <a class="item-text" href="{{ url_for('dashboard') }}">Analytics</a>
+                                        </div>
+                                    </li>
+                                    {% if current_user.is_authenticated and current_user.has_roles('Admin') %}
+
+                                    <li class="header-item">
+                                        <div class="item-group">
+                                            <img src="{{url_for('static', filename='img/settings.png')}}" alt="settings-icon" class="item-img">
+                                            <a class="item-text" href="{{ url_for('admin.index') }}">Admin Panel</a>
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% if current_user.is_authenticated%}
+                        <div class="header-secGroup">
+                            <a href="{{ url_for('logout') }}"><img src="{{url_for('static', filename='img/leave.png')}}" alt="leave-icon" class="header-leave"></a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+      {% endblock %}
+      {% block content%}
+      {% endblock %}
+    </div>
+</body>
+</html>

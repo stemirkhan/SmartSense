@@ -1,0 +1,323 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+a{
+    color:inherit;
+    text-decoration: none;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -----------------------ОБНУЛЕНИЕ------------------------------- */
+body{
+    width: 100%;
+    height: 100%;
+}
+.wrapper{
+    min-height: 100%;
+    overflow: hidden;
+    min-width: 100%;
+}
+
+.auth-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27.895px;
+    line-height: 34px;
+    text-align: center;
+    color: #D8D8D8;
+}
+
+.auth{
+position: fixed;
+width:100%;
+height: 100%;
+background-color: #575DFB;
+top: 0;
+left: 0;
+z-index: 50;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.auth-body{
+background-color: #151924;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 30px 10px;
+border-radius: 10px;
+}
+.auth-content{
+padding: 40px 41px 62px 41px;
+max-width: 600px;
+padding: 20px 30px;
+border-radius: 5px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+}
+.form {
+}
+.form-email-label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.94px;
+    line-height: 19px;
+    color: #D8D8D8;
+    padding-top: 22px;
+    margin-bottom: 10px;
+}
+.email-input-group{
+  position: relative;
+}
+.form-email-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border: 1px solid #242424;
+    border-radius: 10px;
+    padding: 15px 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.94px;
+    line-height: 19px;
+    color: #797979;
+    outline: none;
+    padding-left: 42px;
+}
+.input-icon{
+  position: absolute;
+}
+.input-icon.email{
+  top: 16px;
+  left: 17px;
+  width: 20px;
+  height: 17px;
+}
+.input-icon.pass{
+  top: 14px;
+  width: 20px;
+  height: 20px;
+  left: 14px;
+}
+.input-icon.eye{
+  top: 16px;
+  right: 17px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.input-icon.eye.first.opened{
+  opacity: 0;
+  visibility: hidden;
+}
+.input-icon.eye.first.active{
+  opacity: 0;
+  visibility: hidden;
+}
+.input-icon.eye.first.opened.active{
+  opacity: 1;
+  visibility: visible;
+}
+.form-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+}
+.form-checkbox{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.form-checkbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.form-checkbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #fff;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+.form-checkbox:checked+label::before {
+  border-color: #575DFB;
+  background-color: #575DFB;
+}
+.form-checkbox-label{
+  font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.94px;
+    line-height: 19px;
+    color: #FFF;
+}
+.form-pass-label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.94px;
+    line-height: 19px;
+    color: #D8D8D8;
+    padding-top: 22px;
+    margin-bottom: 10px;
+}
+.form-password-input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #242424;
+    border-radius: 10px;
+    padding: 15px 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.94px;
+    line-height: 19px;
+    color: #797979;
+    outline: none;
+    padding-left: 42px;
+}
+.auth-forgetPass{
+    text-align: right;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.94px;
+    line-height: 19px;
+    color: #D8D8D8;
+
+    cursor: pointer;
+}
+.form-button{
+    width: 100%;
+    background: linear-gradient(91.94deg, #575DFB 139.13%, #B08C97 139.14%);
+    border-radius: 10px;
+    padding: 20px 0px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15.94px;
+    line-height: 19px;
+    color: #FFFFFF;
+    margin-top: 20px;
+    transition: 1s ease all 0s;
+}
+.form-button a{
+  min-width: 100%;
+  min-height: 100%;
+  display: block;
+}
+.form-button:hover{
+    transform: translateY(8px);
+    transition: 0.5s ease all 0s;
+}
+
+@media(max-width:530px){
+  .form-email-input{
+
+  }
+  .auth-form{
+    width: 280px;
+  }
+}
+@media(max-width:380px){
+  .auth-form{
+    
+  }
+  .auth-body{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

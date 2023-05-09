@@ -1,0 +1,246 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+a{
+    color:inherit;
+    text-decoration: none;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -----------------------ОБНУЛЕНИЕ------------------------------- */
+body{
+    width: 100%;
+    height: 100%;
+}
+.wrapper{
+    min-height: 100%;
+    overflow: hidden;
+    min-width: 100%;
+}
+.header_container{
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: content-box;
+    max-width: 1800px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+.header {
+    background-color: #151924;
+    position: relative;
+    z-index: 1;
+}
+.header_container {
+}
+.header-content {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-firstGroup {
+    display: flex;
+    align-items: center;
+}
+.header-logo-group {
+    display: flex;
+    align-items: center;
+}
+.logo-img {
+}
+.header-logo-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    padding-left: 12px;
+}
+.header-itemListDiv{
+    padding-left: 90px;
+}
+.header-itemList {
+    display: flex;
+    align-items: center;
+}
+.header-item {
+    padding-left: 34px;
+    cursor: pointer;
+}
+.item-group {
+    display: flex;
+    align-items: center;
+}
+.item-img {
+    padding-right: 14px;
+}
+.item-text {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #CFD1D4;
+}
+.header-secGroup {
+}
+.header-leave{
+cursor: pointer;
+}
+@media(max-width:850px){
+  .header-itemListDiv{
+    padding-left: 20px;
+  }
+  
+}
+@media(max-width:711px){
+  .item-text{
+    display: none;
+  }
+}
+@media(max-width:494px){
+  .header-logo-title{
+    display: none;
+  }
+  .header-item{
+    padding-left: 18px;
+  }
+}
+
+.error{
+position: fixed;
+width:100%;
+height: 100%;
+background-color: #575DFB;
+top: 0;
+left: 0;
+z-index: 0;
+cursor: default;
+}
+
+.error-body{
+min-height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 30px 10px;
+}
+.error-content{
+max-width: 800px;
+padding-left: 10px;
+padding-right: 10px;
+}
+.error-title{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 160px;
+    line-height: 194px;
+    color: #000000;
+    text-align: center;
+}
+.error-subtitle{
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    padding-top: 36px;
+}
+
+@media(max-width:440px){
+  .error-title{
+    font-size: 120px;
+    line-height: 130px;
+  }
+  .error-subtitle{
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
