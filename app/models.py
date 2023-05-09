@@ -12,14 +12,14 @@ class RoleUser(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False)
+    role_name = db.Column(db.String(100), db.ForeignKey('roles.name'), nullable=False)
 
 
 class Role(db.Model):
     __tablename__ = 'roles'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False, unique=True)
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, unique=True, primary_key=True)
 
     users = db.relationship('RoleUser', backref='user', lazy=True, cascade='all, delete-orphan')
 
@@ -41,6 +41,9 @@ class User(db.Model, UserMixin):
 
     roles = db.relationship('RoleUser', backref='role', lazy=True, cascade='all, delete-orphan')
 
+    def has_roles(self, *args):
+        return set(args).issubset({role.role_name for role in self.roles})
+
     def get_id(self):
         return self.id
 
@@ -56,7 +59,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self._password_hash, password)
 
     def __repr__(self):
-        return f'User(id={self.id}, email={self.email}, user_name={self.name})'
+        return f'User(id={self.id}, email={self.email}, user_name={self.firstname})'
 
 
 class ServerAccessToken(db.Model):

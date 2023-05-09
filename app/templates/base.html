@@ -37,6 +37,7 @@
                                             <a class="item-text" href="{{ url_for('dashboard') }}">Analytics</a>
                                         </div>
                                     </li>
+                                    {% if current_user.is_authenticated and current_user.has_roles('Admin') %}
 
                                     <li class="header-item">
                                         <div class="item-group">
@@ -44,12 +45,15 @@
                                             <a class="item-text" href="{{ url_for('admin.index') }}">Admin Panel</a>
                                         </div>
                                     </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
+                        {% if current_user.is_authenticated%}
                         <div class="header-secGroup">
                             <a href="{{ url_for('logout') }}"><img src="{{url_for('static', filename='img/leave.png')}}" alt="leave-icon" class="header-leave"></a>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
