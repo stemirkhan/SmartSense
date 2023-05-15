@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, jsonify, request
 from flask_login import login_user, current_user, login_required, logout_user
 
 from app import app
@@ -27,10 +27,13 @@ def login():
 @login_required
 def dashboard():
     readings_value = db.session.query(SensorReading).order_by(SensorReading.id.desc()).first()
-    sensor_readings = (('Температура', readings_value.temperature),
-                       ('Влажность', readings_value.humidity),
-                       ('Угарный газ', readings_value.carbon_monoxide),
-                       ('Атмосферное давление', readings_value.pressure))
+    sensor_readings = (('Температура', 'temperature', readings_value.temperature),
+                       ('Влажность', 'humidity', readings_value.humidity),
+                       ('Угарный газ', 'carbon_monoxide', readings_value.carbon_monoxide),
+                       ('Атмосферное давление', 'atmosphere_pressure', readings_value.pressure))
+
+    if request.is_json:
+        return jsonify({kit[1]: kit[2] for kit in sensor_readings})
 
     return render_template('dashboard.html', sensor_readings=sensor_readings, title='Dashboard')
 
