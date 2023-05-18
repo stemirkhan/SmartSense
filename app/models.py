@@ -1,10 +1,12 @@
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash,  check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.ext.hybrid import hybrid_property
+import jwt
 
-from app import db, login_manager
+from app import db, login_manager, app
 
 from datetime import datetime
+from time import time
 
 
 class RoleUser(db.Model):
@@ -24,7 +26,7 @@ class Role(db.Model):
     users = db.relationship('RoleUser', backref='user', lazy=True, cascade='all, delete-orphan')
 
     def __repr__(self):
-        return f'Role(rile_id={self.id})'
+        return f'{self.name}'
 
 
 class User(db.Model, UserMixin):
@@ -44,6 +46,18 @@ class User(db.Model, UserMixin):
     def has_roles(self, *args):
         return set(args).issubset({role.role_name for role in self.roles})
 
+    def get_reset_password_token(self, expires_in=300):
+        return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
+                          app.config['SECRET_KEY'], algorithm='HS256')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            check_id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+        except jwt.exceptions.DecodeError:
+            return False
+        return User.query.get(check_id)
+
     def get_id(self):
         return self.id
 
@@ -59,7 +73,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self._password_hash, password)
 
     def __repr__(self):
-        return f'User(id={self.id}, email={self.email}, user_name={self.firstname})'
+        return f'{self.firstname} {self.lastname}'
 
 
 class ServerAccessToken(db.Model):
@@ -70,7 +84,7 @@ class ServerAccessToken(db.Model):
     access_token = db.Column(db.String(500), nullable=False, unique=True)
 
     def __repr__(self):
-        return f"ServerAccessToken(token_id={self.id}, token_name={self.name})"
+        return f"{self.name})"
 
 
 class SensorReading(db.Model):
