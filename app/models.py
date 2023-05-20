@@ -54,7 +54,7 @@ class User(db.Model, UserMixin):
     def verify_reset_password_token(token):
         try:
             check_id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
-        except jwt.exceptions.DecodeError:
+        except (jwt.exceptions.DecodeError, jwt.exceptions.ExpiredSignatureError):
             return False
         return User.query.get(check_id)
 
