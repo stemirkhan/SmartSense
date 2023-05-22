@@ -14,7 +14,7 @@ class RoleUser(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    role_name = db.Column(db.String(100), db.ForeignKey('roles.name'), nullable=False)
+    role_name = db.Column(db.String(100), db .ForeignKey('roles.name'), nullable=False)
 
 
 class Role(db.Model):
@@ -99,6 +99,16 @@ class SensorReading(db.Model):
 
     def __repr__(self):
         return f'SensorReading(recording_id={self.id})'
+
+
+class ResetPasswordToken(db.Model):
+    __tablename__ = 'reset_password_tokens'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    jwt_token = db.Column(db.String(300), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    user = db.relationship("User", backref=db.backref("reset_password_url", uselist=False))
 
 
 @login_manager.user_loader
