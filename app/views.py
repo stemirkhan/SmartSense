@@ -1,10 +1,10 @@
-from flask import render_template, url_for, redirect, jsonify, request
+from flask import render_template, url_for, redirect, jsonify, request, flash
 from flask_login import login_user, current_user, login_required, logout_user
 
 from app import app
-from app.models import User, SensorReading, db
+from app.models import User, SensorReading, db, ResetPasswordToken
 from app.forms import LoginForm, ResetPasswordRequestForm, ResetPasswordForm
-from app.email import  send_password_reset_email
+from app.email import send_password_reset_email
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -21,10 +21,13 @@ def login():
             login_user(user, remember=form.remember.data)
             return redirect(url_for(endpoint='dashboard'))
 
+        flash('The entered email or password information is not correct.')
+
     return render_template('login.html', title='Sign In', form=form)
 
 
 @app.route('/dashboard')
+@app.route('/')
 @login_required
 def dashboard():
     readings_value = db.session.query(SensorReading).order_by(SensorReading.id.desc()).first()
@@ -39,8 +42,8 @@ def dashboard():
     return render_template('dashboard.html', sensor_readings=sensor_readings, title='Dashboard')
 
 
-@app.route('/reset_password_request', methods=['GET', 'POST'])
-def reset_password_request():
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
 
@@ -50,11 +53,19 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
 
         if user:
-            send_password_reset_email(user)
+            jwt_token = ResetPasswordToken.query.filter_by(user_id=user.id).first()
 
-        return redirect(url_for('login'))
+            if not jwt_token:
+                send_password_reset_email(user)
+                flash('Password reset instructions have been sent to your email')
+            else:
+                flash('Password reset instructions were recently sent to your email')
 
-    return render_template('reset_password_request.html', title='Reset Password', form=form)
+            return redirect(url_for('login'))
+
+        flash('User with such data does not exist')
+
+    return render_template('forgot_password.html', title='Forgot Password', form=form)
 
 
 @app.route('/reset_password/<reset_token>', methods=['GET', 'POST'])
@@ -69,6 +80,10 @@ def reset_password(reset_token):
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.password = form.password.data
+
+        jwt_token = ResetPasswordToken.query.filter_by(user_id=user.id).first()
+
+        db.session.delete(jwt_token)
         db.session.commit()
 
         return redirect(url_for('login'))

@@ -2,6 +2,7 @@ from flask import render_template
 from flask_mail import Message
 
 from app import mail, app
+from app.models import ResetPasswordToken, db
 
 from threading import Thread
 
@@ -21,6 +22,10 @@ def send_email(subject, sender, recipients, html_body):
 
 def send_password_reset_email(user):
     token = user.get_reset_password_token()
+
+    current_token = ResetPasswordToken(jwt_token=token, user_id=user.id)
+    db.session.add(current_token)
+    db.session.commit()
 
     send_email('[SmartSense] Reset Your Password',
                sender=app.config['MAIL_USERNAME'], recipients=[user.email],
