@@ -107,6 +107,7 @@ class ResetPasswordToken(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     jwt_token = db.Column(db.String(300), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.utcnow)
 
     user = db.relationship("User", backref=db.backref("reset_password_url", uselist=False))
 
