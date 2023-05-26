@@ -3,7 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.ext.hybrid import hybrid_property
 import jwt
 
-from app import db, login_manager, app
+from app import db, app
+from app.auth import login_manager
 
 from datetime import datetime
 from time import time

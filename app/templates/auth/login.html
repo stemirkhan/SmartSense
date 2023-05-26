@@ -36,7 +36,7 @@
                     {{ form.remember(type="checkbox", id="remember", class="form-checkbox")}}
                         <label for="remember" class="form-checkbox-label">{{form.remember.label.text}}</label>
                     </div>
-                    <a class="auth-forgetPass" href="{{ url_for('reset_password_request') }}">Forgot your password?</a>
+                    <a class="auth-forgetPass" href="{{ url_for('auth.forgot_password') }}">Forgot your password?</a>
                 </div>
             {{ form.submit(type="submit", class="form-button", value="Sign In") }}
             </form>

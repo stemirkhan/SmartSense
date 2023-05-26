@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('.static', filename='style/main.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style/main.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>{{title}}</title>
@@ -28,14 +28,14 @@
                                     <li class="header-item">
                                         <div class="item-group">
                                             <img src="{{url_for('static', filename='img/home.png')}}" alt="dashboard-icon" class="item-img">
-                                            <a class="item-text" href="{{ url_for('dashboard') }}">Dashboard</a>
+                                            <a class="item-text" href="{{ url_for('general.dashboard') }}">Dashboard</a>
                                         </div>
                                     </li>
 
                                     <li class="header-item">
                                         <div class="item-group">
                                             <img src="{{url_for('static', filename='img/graph.png')}}" alt="analytics-icon" class="item-img">
-                                            <a class="item-text" href="{{ url_for('dashboard') }}">Analytics</a>
+                                            <a class="item-text" href="{{ url_for('general.dashboard') }}">Analytics</a>
                                         </div>
                                     </li>
                                     {% if current_user.is_authenticated and current_user.has_roles('Admin') %}
@@ -52,7 +52,7 @@
                         </div>
                         {% if current_user.is_authenticated%}
                         <div class="header-secGroup">
-                            <a href="{{ url_for('logout') }}"><img src="{{url_for('static', filename='img/leave.png')}}" alt="leave-icon" class="header-leave"></a>
+                            <a href="{{ url_for('auth.logout') }}"><img src="{{url_for('static', filename='img/leave.png')}}" alt="leave-icon" class="header-leave"></a>
                         </div>
                         {% endif %}
                     </div>

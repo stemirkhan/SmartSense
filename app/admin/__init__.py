@@ -8,7 +8,7 @@ from flask_admin.menu import MenuLink
 
 class MainIndexLink(MenuLink):
     def get_url(self):
-        return url_for("dashboard")
+        return url_for("general.dashboard")
 
 
 class BaseModelView(ModelView):
