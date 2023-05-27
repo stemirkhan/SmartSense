@@ -23,7 +23,7 @@ def login():
 
         flash('The entered email or password information is not correct.')
 
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('auth/login.html', title='Sign In', form=form)
 
 
 @bp_auth.route('/forgot_password', methods=['GET', 'POST'])
@@ -53,7 +53,7 @@ def forgot_password():
 
         flash('User with such data does not exist')
 
-    return render_template('forgot_password.html', title='Forgot Password', form=form)
+    return render_template('auth/forgot_password.html', title='Forgot Password', form=form)
 
 
 @bp_auth.route('/reset_password/<reset_token>', methods=['GET', 'POST'])
@@ -77,7 +77,7 @@ def reset_password(reset_token):
 
         return redirect(url_for('auth.login'))
 
-    return render_template('reset_password.html', title='Reset Password', form=form)
+    return render_template('auth/reset_password.html', title='Reset Password', form=form)
 
 
 @bp_auth.route('/logout')
