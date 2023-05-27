@@ -210,6 +210,17 @@ border-radius: 5px;
     transition: 0.5s ease all 0s;
 }
 
+.form-invalid{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15.94px;
+  line-height: 19px;
+  color: #D8D8D8;
+  text-align: center;
+  padding-top: 20px;
+}
+
 @media(max-width:530px){
   .form-email-input{
 
