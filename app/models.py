@@ -2,8 +2,10 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.ext.hybrid import hybrid_property
 import jwt
+from flask import current_app
 
-from app import db, login_manager, app
+from app import db
+from app.auth import login_manager
 
 from datetime import datetime
 from time import time
@@ -14,7 +16,7 @@ class RoleUser(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    role_name = db.Column(db.String(100), db.ForeignKey('roles.name'), nullable=False)
+    role_name = db.Column(db.String(100), db .ForeignKey('roles.name'), nullable=False)
 
 
 class Role(db.Model):
@@ -48,13 +50,13 @@ class User(db.Model, UserMixin):
 
     def get_reset_password_token(self, expires_in=300):
         return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
-                          app.config['SECRET_KEY'], algorithm='HS256')
+                          current_app.config['SECRET_KEY'], algorithm='HS256')
 
     @staticmethod
     def verify_reset_password_token(token):
         try:
-            check_id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
-        except jwt.exceptions.DecodeError:
+            check_id = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+        except (jwt.exceptions.DecodeError, jwt.exceptions.ExpiredSignatureError):
             return False
         return User.query.get(check_id)
 
@@ -99,6 +101,17 @@ class SensorReading(db.Model):
 
     def __repr__(self):
         return f'SensorReading(recording_id={self.id})'
+
+
+class ResetPasswordToken(db.Model):
+    __tablename__ = 'reset_password_tokens'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    jwt_token = db.Column(db.String(300), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship("User", backref=db.backref("reset_password_url", uselist=False))
 
 
 @login_manager.user_loader

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('.static', filename='style/login.css')}}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+{% endblock%}
+
+{% block menu%}
+{% endblock %}
+
+{% block content%}
+<div class="auth">
+    <div class="auth-body">
+        <div class="auth-content">
+            <h1 class="auth-title">Welcome</h1>
+            <form action="" method="post" class="auth-form form">
+            {{ form.hidden_tag() }}
+                <label for="email" class="form-email-label">{{form.email.label.text}}</label>
+                <div class="email-input-group">
+                {{ form.email(type="email", id="email", class="form-email-input", placeholder="Enter your email")}}
+                    <img src="{{url_for('static', filename='img/email.jpg')}}" alt="email" class="input-icon email">
+                </div>
+
+                <label for="password" class="form-pass-label">{{form.password.label.text}}</label>
+
+                <div class="email-input-group">
+                {{ form.password(type="password", id="password", class="form-password-input", placeholder="Enter password")}}
+                    <img src="{{url_for('static', filename='img/lock.jpg')}}" alt="lock" class="input-icon pass">
+                    <img src="{{url_for('static', filename='img/close_eye.svg')}}" alt="lock" class="input-icon eye first">
+                    <img src="{{url_for('static', filename='img/open_eye.svg')}}" alt="lock" class="input-icon eye first opened">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-checkbox-group">
+                    {{ form.remember(type="checkbox", id="remember", class="form-checkbox")}}
+                        <label for="remember" class="form-checkbox-label">{{form.remember.label.text}}</label>
+                    </div>
+                    <a class="auth-forgetPass" href="{{ url_for('auth.forgot_password') }}">Forgot your password?</a>
+                </div>
+            {{ form.submit(type="submit", class="form-button", value="Sign In") }}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  {% for category, message in messages %}
+                     <p class="form-invalid">{{ message }}</p>
+                  {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{{url_for('static', filename='js/login.js')}}"></script>
+{% endblock %}
