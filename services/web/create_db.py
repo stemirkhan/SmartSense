@@ -4,7 +4,7 @@ import os
 from app import create_app
 
 LEFT_USER_PSW = os.environ.get('LEFT_USER_PSW')
-LEFT_USER_NAME = os.environ.get('LEFT_USER_NAME')
+LEFT_USER_EMAIL = os.environ.get('LEFT_USER_EMAIL')
 
 app = create_app(config_class='config.ProductionConfig')
 
@@ -16,7 +16,7 @@ with app.app_context():
     db.session.add(role)
     db.session.commit()
     
-    user = User(email='admin@gmail.com', firstname=LEFT_USER_PSW, lastname=LEFT_USER_NAME, telegram_notifications=False)
+    user = User(email=LEFT_USER_EMAIL, firstname='admin', lastname='admin', telegram_notifications=False)
     user.password = LEFT_USER_PSW
     db.session.add(user)
     db.session.commit()
