@@ -20,11 +20,12 @@ The development of all parts of the application was carried out in separate repo
   - [Deployment](#deployment)
     - [Prodactions](#prodactions)
   - [Structure](#structure)
-      - [Information Architecture](#information-architecture)
+      - [Site structure](#site-structure)
       - [Data Structure](#data-structure)
 
 
 ## Deployment
+### Prodactions
 
 The first step is to clone the command line project.
 
@@ -33,14 +34,14 @@ git clone https://github.com/stemirkhan/SmartSense.git
 ```
 
 Next, you need to set the environment variables in the track files.  
-Environment variables in .env.prod.db file
+Environment variables in `.env.prod.db` file
 
 ```
 POSTGRES_USER=
 POSTGRES_PASSWORD=
 POSTGRES_DB=
 ```  
-Environment variables in the .env.prod file
+Environment variables in the `.env.prod` file
 
 ```
 TYPE_CONFIG=config.ProductionConfig
@@ -61,7 +62,7 @@ SQL_HOST=
 SQL_PORT=
 ```
 
-Environment variables in the .env.prod.services file
+Environment variables in the `.env.prod.services` file
 
 ```
 SENSOR_READINGS_TABLE= 
@@ -73,7 +74,7 @@ PASSWORD_DB=
 DATABASE=
 ```
 
-Site settings that are not set using environment variables can be set in the services/web/config.py file
+Site settings that are not set using environment variables can be set in the `services/web/config.py` file
 
 ``` Python
 
